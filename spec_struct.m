@@ -7,7 +7,7 @@ x_voxel = 0.0699;
 z_voxel = 0.2098;
 voxelSize = [x_voxel x_voxel z_voxel];
 
-%all samples should be 16 cells - get file for analysis
+%input sample number and number of cells in cyst of interest
 sample = '2_1';
 num_cells = '2';
 smooth = 5; %smoothing factor for fusome/ring splitting (can adjust)
@@ -86,8 +86,7 @@ view([8 52])
 %% split fusome and rings into component parts
 clc;
 newfus_labeled = split_fusome(0, interp_newfus, interp_newring, smooth);
-%%
-%Find adjacencies between objects
+%% Find adjacencies between objects
 bw = imdilate(interp_newring, create_ball(1));
 newimage = newfus_labeled.*(bw > 0);
 
